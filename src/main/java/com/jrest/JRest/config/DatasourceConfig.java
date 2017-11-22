@@ -2,6 +2,7 @@ package com.jrest.JRest.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -20,10 +21,11 @@ import javax.sql.DataSource;
 import javax.inject.Qualifier;
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.jrest.JRest.config")
+@EnableJpaRepositories(basePackages = "com.jrest.JRest.repository")
 public class DatasourceConfig {
 
     @Bean
+    @Primary
     public DataSource datasource() throws PropertyVetoException {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         EmbeddedDatabase dataSource = builder
@@ -35,11 +37,13 @@ public class DatasourceConfig {
         return dataSource;
     }
 
+
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DataSource ds) throws PropertyVetoException{
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(ds);
-        entityManagerFactory.setPackagesToScan(new String[]{"com.nouhoun.springboot.jwt.integration.domain"});
+        entityManagerFactory.setPackagesToScan(new String[]{"com.jrest.JRest.repository.domain"});
         JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
         return entityManagerFactory;
