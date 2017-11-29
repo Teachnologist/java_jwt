@@ -28,9 +28,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @EnableJpaRepositories(basePackages = "com.jrest.JRest.repository")
 public class DatasourceConfig {
 
-    @Primary
     @Bean(name = "datasource")
-    @ConfigurationProperties(prefix="spring.mysql.datasource")
     public DataSource datasource() throws PropertyVetoException {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         EmbeddedDatabase dataSource = builder
@@ -43,8 +41,8 @@ public class DatasourceConfig {
     }
 
 
-    @Autowired
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DataSource datasource) throws PropertyVetoException{
+    @Bean @Autowired
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource datasource) throws PropertyVetoException{
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(datasource);
         entityManagerFactory.setPackagesToScan(new String[]{"com.jrest.JRest.repository.domain"});

@@ -1,0 +1,14 @@
+com/jrest/JRest/domain/Role.class
+com/jrest/JRest/domain/User.class
+com/jrest/JRest/service/impl/GenericServiceImpl.class
+com/jrest/JRest/service/GenericService.class
+com/jrest/JRest/controller/ResourceController.class
+com/jrest/JRest/repository/RoleRepository.class
+com/jrest/JRest/config/AuthorizationServerConfig.class
+com/jrest/JRest/repository/RandomCityRepository.class
+com/jrest/JRest/repository/UserRepository.class
+com/jrest/JRest/JRestApiApplication.class
+com/jrest/JRest/config/DatasourceConfig.class
+com/jrest/JRest/config/SecurityConfig.class
+com/jrest/JRest/domain/RandomCity.class
+com/jrest/JRest/service/impl/AppUserDetailsService.class
